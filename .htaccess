@@ -1,0 +1,21 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Set the base directory
+RewriteBase /
+
+# Allow direct access to assets directory
+RewriteCond %{REQUEST_URI} !^/assets/
+
+# Block direct access to any .php file anywhere EXCEPT /index.php
+# This rule now looks for .php anywhere in the URL, not just the root
+RewriteCond %{REQUEST_URI} \.php$
+RewriteCond %{REQUEST_URI} !^/index\.php$
+RewriteRule .*\.php$ - [F,L] 
+
+# Redirect all other requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+
