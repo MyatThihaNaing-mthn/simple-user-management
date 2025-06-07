@@ -40,6 +40,9 @@ switch ($request) {
     case '/admin/dashboard':
         $content = 'views/admin/AdminDashboard.php';
         break;
+    case '/member/feed':
+        $content = 'views/member/Feed.php';
+        break;
     default:
         header("HTTP/1.0 404 Not Found");
         $content = 'views/error/404.php';
@@ -72,7 +75,7 @@ if (!file_exists($content)) {
         <div>
             <ul>
                 <?php if (isset($_SESSION['userId']) && isset($_SESSION['username'])): ?>
-                    <?php if ($_SESSION['role'] === strtolower(UserRole::MEMBER->name)): ?>
+                    <?php if ($_SESSION['role'] === strtolower(UserRole::ADMIN->name)): ?>
                         <li><a href="/admin/dashboard">Dashboard</a></li>
                     <?php endif; ?>
                     <li><a href="#"> <?php echo $_SESSION['username'] ?> </a></li>
